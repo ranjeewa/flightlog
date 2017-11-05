@@ -2,8 +2,8 @@ package com.ranjeewa.flightlog.controllers;
 
 import com.ranjeewa.flightlog.domain.FlightLog;
 import com.ranjeewa.flightlog.service.FileService;
-import com.ranjeewa.flightlog.service.FlightLogService;
 import com.ranjeewa.flightlog.service.FlightLogRepository;
+import com.ranjeewa.flightlog.service.MessageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Description;
@@ -30,13 +30,14 @@ public class FlightLogController {
     private final static Logger logger = LoggerFactory.getLogger(FlightLogController.class);
 
     private final FileService fileService;
-    private final FlightLogService parserService;
     private final FlightLogRepository flightLogRepository;
+    private final MessageService messageService;
 
-    FlightLogController(FileService fileService, FlightLogService parserService, FlightLogRepository flightLogRepository) {
+    FlightLogController(FileService fileService,
+                        FlightLogRepository flightLogRepository, MessageService messageService) {
         this.fileService = fileService;
-        this.parserService = parserService;
         this.flightLogRepository = flightLogRepository;
+        this.messageService = messageService;
     }
 
     @RequestMapping(method = GET, path = "/flights/{id}")
@@ -73,11 +74,13 @@ public class FlightLogController {
 
         String fileName = fileService.saveFile(flightLog);
         if (fileName != null) {
-            //TODO make parsing request async
-            parserService.saveFlightLogValues(fileName);
+            //Publish JMS message to process file
+            messageService.publishFlightLogSaved(fileName);
+            //Return URI in JSON response
             Map<String, String> model = Collections.singletonMap("resourceId", "/flights/" + fileName);
             return new ResponseEntity<>(model, HttpStatus.OK);
         } else {
+            //No file saved
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
