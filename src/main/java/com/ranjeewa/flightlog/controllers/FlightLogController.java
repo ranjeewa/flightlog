@@ -1,6 +1,9 @@
 package com.ranjeewa.flightlog.controllers;
 
+import com.ranjeewa.flightlog.domain.FlightLog;
 import com.ranjeewa.flightlog.service.FileService;
+import com.ranjeewa.flightlog.service.FlightLogService;
+import com.ranjeewa.flightlog.service.FlightLogRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Description;
@@ -12,10 +15,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
-import javax.websocket.server.PathParam;
 import java.io.*;
-import java.nio.file.Files;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -28,13 +30,17 @@ public class FlightLogController {
     private final static Logger logger = LoggerFactory.getLogger(FlightLogController.class);
 
     private final FileService fileService;
+    private final FlightLogService parserService;
+    private final FlightLogRepository flightLogRepository;
 
-    FlightLogController(FileService fileService) {
+    FlightLogController(FileService fileService, FlightLogService parserService, FlightLogRepository flightLogRepository) {
         this.fileService = fileService;
+        this.parserService = parserService;
+        this.flightLogRepository = flightLogRepository;
     }
 
     @RequestMapping(method = GET, path = "/flights/{id}")
-    public ResponseEntity<Resource> downloadFlightLog(@PathVariable("id") String fileName) throws IOException {
+    ResponseEntity<Resource> downloadFlightLog(@PathVariable("id") String fileName) throws IOException {
 
         File flightLog = fileService.findFile(fileName);
 
@@ -47,11 +53,26 @@ public class FlightLogController {
         }
     }
 
+    @RequestMapping(method = GET, path = "/flights/{id}/battery", produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<Map<String, String>> findBatteryValues(@PathVariable("id") String fileName) throws IOException {
+        FlightLog log = flightLogRepository.findByFlightLogFileName(fileName);
+        if (log == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            Map<String, String> model = new HashMap<>();
+            model.put("resourceId", "/flights/"+fileName);
+            model.put("startValue", log.getStartValue());
+            model.put("endValue", log.getEndValue());
+            return new ResponseEntity<>(model, HttpStatus.OK);
+        }
+    }
+
     @RequestMapping(method = POST, path= "/flights", produces = "application/json")
-    public @ResponseBody Map<String, String> uploadFlightLog(InputStream flightLog) throws IOException {
+    @ResponseBody Map<String, String> uploadFlightLog(InputStream flightLog) throws IOException {
 
         String fileName = fileService.saveFile(flightLog);
-        //TODO fire off parsing request
+        //TODO make parsing request async
+        parserService.saveFlightLogValues(fileName);
         return Collections.singletonMap("resourceId", "/flights/" + fileName);
     }
 

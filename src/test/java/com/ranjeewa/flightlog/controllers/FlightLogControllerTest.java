@@ -1,6 +1,8 @@
 package com.ranjeewa.flightlog.controllers;
 
 import com.ranjeewa.flightlog.service.FileService;
+import com.ranjeewa.flightlog.service.FlightLogService;
+import com.ranjeewa.flightlog.service.FlightLogRepository;
 import org.junit.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,15 +17,20 @@ import static org.mockito.Mockito.*;
 
 public class FlightLogControllerTest {
 
+    private static FlightLogService mockParserService = mock(FlightLogService.class);
+    private static FlightLogRepository mockRepository = mock(FlightLogRepository.class);
+
+
     @Test
     public void uploadReturnsFileName() throws Exception {
 
+        FileService mockFileService = mock(FileService.class);
         String savedFile = "newFileName.log";
 
-        FileService service = mock(FileService.class);
-        when(service.saveFile(any())).thenReturn(savedFile);
+        when(mockFileService.saveFile(any())).thenReturn(savedFile);
 
-        FlightLogController controller = new FlightLogController(service);
+
+        FlightLogController controller = new FlightLogController(mockFileService, mockParserService, mockRepository);
         Map<String, String> response = controller.uploadFlightLog(new ByteArrayInputStream("flightlog".getBytes()));
         assertNotNull(response);
         assertEquals("/flights/"+ savedFile, response.get("resourceId"));
@@ -32,11 +39,11 @@ public class FlightLogControllerTest {
     @Test
     public void failureReturnsError() throws Exception {
 
-        FileService service = mock(FileService.class);
-        when(service.saveFile(any())).thenThrow(new IOException("failed to save"));
+        FileService mockFileService = mock(FileService.class);
+        when(mockFileService.saveFile(any())).thenThrow(new IOException("failed to save"));
 
         try {
-            FlightLogController controller = new FlightLogController(service);
+            FlightLogController controller = new FlightLogController(mockFileService, mockParserService, mockRepository);
             Map<String, String> response = controller.uploadFlightLog(new ByteArrayInputStream("flightlog".getBytes()));
             fail("Should throw exception");
         } catch (Exception e) {
@@ -54,7 +61,7 @@ public class FlightLogControllerTest {
         FileService mockFileService = mock(FileService.class);
         when(mockFileService.findFile(any())).thenReturn(file);
 
-        FlightLogController controller = new FlightLogController(mockFileService);
+        FlightLogController controller = new FlightLogController(mockFileService, mockParserService, mockRepository);
 
         ResponseEntity responseEntity = controller.downloadFlightLog("log123");
         assertNotNull(responseEntity);
@@ -68,9 +75,9 @@ public class FlightLogControllerTest {
         FileService mockFileService = mock(FileService.class);
         when(mockFileService.findFile(any())).thenReturn(null);
 
-        FlightLogController controller = new FlightLogController(mockFileService);
+        FlightLogController controller = new FlightLogController(mockFileService, mockParserService, mockRepository);
 
-        ResponseEntity responseEntity = controller.downloadFlightLog("log123");
+        ResponseEntity responseEntity = controller.downloadFlightLog("noSuchLog");
         assertNotNull(responseEntity);
         assertEquals(HttpStatus.NOT_FOUND.value(), responseEntity.getStatusCodeValue());
     }

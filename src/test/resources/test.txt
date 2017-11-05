@@ -1,0 +1,36 @@
+#DroneDeploy	2.0.15
+#Flight Recorder
+Session ID	580258c3c46ab21123f0ded7
+Session Start	10/15/2016 01:42:57
+#Device
+Device Model	iPhone
+Device User Interface Idiom	iPhone	0
+Device Operating System	iPhone OS	10.0.2
+Device SSID	
+#Aircraft
+Aircraft Model	Phantom 4
+Aircraft Name	skynce001
+Aircraft Firmware	01.02.0503
+#Aircraft Battery
+Full Charge Volume (mAh)	5596
+Remaining Life (%)	100
+Discharges	1
+#Components
+Battery Cells Number	4
+Battery Serial Number	58B5979A
+Battery Firmware	02.00.02.75
+Flight Controller Serial Number	9058FD75
+Flight Controller Firmware	03.01.10.93
+Gimbal Firmware	01.50.12.56
+Remote Control Serial Number	1.1.5+
+Remote Control Firmware	1.1.5+
+Camera Serial Number	BB4EB0A0
+Date/Time (GMT)	Elapsed Time (sec)	Info	Device Latitude (Degrees)	Device Longitude (Degrees)	Device Location Last Updated (ms)	Aircraft Battery Power (%)	Aircraft Battery Charge (mAh)	Aircraft Battery Current (mA)	Aircraft Battery Voltage (mV)	Aircraft Battery Temperature (Fahrenheit)	Aircraft Battery Last Updated (ms)	Aircraft Battery Cell 1 Voltage	Aircraft Battery Cell 2 Voltage	Aircraft Battery Cell 3 Voltage	Aircraft Battery Cell 4 Voltage	Aircraft Battery Cell Voltage Last Updated (ms)	Aircraft Latitude (Degrees)	Aircraft Longitude (Degrees)	Aircraft Speed (mph)	Aircraft Barometric Altitude (ft)	Aircraft Heading (Degrees)	Aircraft Vel - X (mph)	Aircraft Vel - Y (mph)	Aircraft Vel - Z (mph)	Aircraft Pitch (Degrees)	Aircraft Roll (Degrees)	Aircraft Satellites	Aircraft Motors On	Aircraft Flying	Aircraft Flight Mode	Aircraft Flight Mode Value	Aircraft IMU Preheating	Aircraft Ultrasonic On	Aircraft Ultrasonic Altitude (ft)	Aircraft Vision On	Aircraft GPS Signal	Aircraft GPS Signal Value	Aircraft No-fly	Aircraft No-fly Value	Aircraft No-fly Latitude (Degrees)	Aircraft No-fly Longitude (Degrees)	Aircraft No-fly Radius (ft)	Home Latitude (Degrees)	Home Latitude (Degrees)	Aircraft Smart Go-home Flight Time Remaining (sec)	Aircraft Smart Go-home Flight Return Time (sec)	Aircraft Smart Go-home Landing Time (sec)	Aircraft Smart Go-home Return Power (%)	Aircraft Smart Go-home Landing Power (%)	Aircraft Smart Go-home Radius (ft)	Aircraft Smart Go-home Requesting	Aircraft System State Last Updated (ms)	Gimbal Pitch (Degrees)	Gimbal Roll (Degrees)	Gimbal Yaw (Degrees)	Gimbal Mode	Gimbal Mode Value	Gimbal Pitch at Stop	Gimbal Roll at Stop	Gimbal Yaw at Stop	Gimbal Status Last Updated (ms)	Landing Gear is Movable	Landing Gear Status	Landing Gear Status Value	Landing Gear Mode	Landing Gear Mode Value	Landing Gear Last Updated (ms)	RC State	RC State Value	RC Left Horizontal	RC Left Vertical	RC Right Horizontal	RC Right Vertical	RC Left Wheel	RC Right Wheel	RC Landing Gear	RC Landing Gear Value	RC Go Home	RC Record 	RC Shutter	RC Playback	RC Pause	RC Custom 1	RC Custom 2	RC State Last Updated (ms)	RC Battery (%)	RC Battery State Last Updated (ms)	RC Sattelites	RC Horizontal Accuaracy (ft)	RC Latitude (Degrees)	RC Longitude (Degrees)	RC GSP Data is Valid	RC GPS State Last Updated (ms)	RC Signal 1	RC Signal 2	RC Signal Last Updated (ms)	LB Signal 1	LB Signal 2	LB Signal Last Updated (ms)	Aircraft Camera Mode	Aircraft Camera Mode Value	Aircraft Camera Overheated	Aircraft Camera Sensor Error	Aircraft Camera Recording	Aircraft Camera Raw Capture	Aircraft Camera Interval Capture	Aircraft Camera Burst Capture	Aircraft Camera Single Capture	Aircraft Camera Storing Photo	Aircraft Camera State Last Updated (ms)	Aircraft Camera SD Card Exists	Aircraft Camera SD Card Remaining (%)	Aircraft Camera SD Card State Last Updated (ms)	Aircraft Camera Changeable Lens Supported	Aircraft Camera Lens Installed	Aircraft Camera Lens Type	Aircraft Camera Lens Type Value	Aircraft Camera Lens AF Enabled	Aircraft Camera Lens Focus Mode	Aircraft Camera Lens Focus Mode Value	Aircraft Camera Lens Focus Status	Aircraft Camera Lens Focus Status Value	Aircraft Camera Lens MF Assistant	Aircraft Camera Lens AF Assistant	Aircraft Camera Lens Assistant Working	Aircraft Camera Lens State Last Updated (ms)	Device > Aircraft Distance - XY (ft)
+10/15/2016 01:43:00	3.018	Mission did take off	29.96428828689266	-95.69879075521202	3003	97	5428	-1904	17074	80	653	4245	4245	4240	4237	0	29.9642533236692	-95.69872614665755	6.21371e-05	-3.937008	141.2	6.21371e-05	0	0.000621371	3.9	-1.7	17	1	0	TakeOff	11	0	1	0	0	Very Strong	5	Flying Normally	0	-180	-180	0	29.96425269034357	-95.69872569900717	0	0	0	0	0	0	0	49	0	0	141.1999969482422	Yaw Follow	2	0	0	0	50	0	Unknown	0	Unknown	3	No Data	P	2	0	0	0	0	0	0	No Present	254	0	0	0	0	0	0	0	50	100	341	0	0	0	0	0	341	100	100	452	100	100	553	Shoot Photo	0	0	0	0	0	0	0	0	0	50	1	99.23344	50	0	0	AF	0	0	Manual	0	Idle	0	0	0	0	No Data	24.08903885207222
+10/15/2016 01:43:00	3.122		29.96428828689266	-95.69879075521202	3107	97	5428	-1904	17074	80	757	4245	4245	4240	4237	103	29.96425344027532	-95.69872618434606	0.0001242742	-4.593176	140.6	0.0001242742	0	0.000621371	3.6	-1.4	17	1	1	TakeOff	11	0	1	0	0	Very Strong	5	Flying Normally	0	-180	-180	0	29.96425269034357	-95.69872569900717	0	0	0	0	0	0	0	52	0	0	141.1999969482422	Yaw Follow	2	0	0	0	53	0	Unknown	0	Unknown	3	No Data	P	2	0	0	0	0	0	0	No Present	254	0	0	0	0	0	0	0	53	100	445	0	0	0	0	0	445	100	100	53	100	100	657	Shoot Photo	0	0	0	0	0	0	0	0	0	52	1	99.23344	52	0	0	AF	0	0	Manual	0	Idle	0	0	0	0	No Data	24.05653499648661
+10/15/2016 01:45:36	158.917		29.96428828689266	-95.69879075521202	158902	88	4868	-10648	15912	93	639	4000	4005	4002	4005	0	29.964249734932	-95.69872369735209	0	-1.312336	-127.2	0	0	0	-5.600000000000001	-0.6000000000000001	17	1	1	Landing	12	0	1	0	0	Very Strong	5	Flying Normally	0	-180	-180	0	29.96425269034357	-95.69872569900717	1471	0	0	15	10	18821	0	42	0	0	-127.6999969482422	Yaw Follow	2	0	0	0	43	0	Unknown	0	Unknown	3	No Data	P	2	0	0	0	0	0	0	No Present	254	0	0	0	0	0	0	0	43	100	739	0	0	0	0	0	739	100	100	340	100	100	42	Record Video	1	0	0	0	0	0	0	0	0	43	1	98.13274	43	0	0	AF	0	0	Manual	0	Idle	0	0	0	0	No Data	25.44634982011409
+10/15/2016 01:45:36	159.018		29.96428828689266	-95.69879075521202	159003	88	4868	-10648	15912	93	739	4000	4005	4002	4005	99	29.96424975289423	-95.69872368502834	0	-1.312336	-127.2	0	0	0	-5.600000000000001	-0.7000000000000001	17	1	1	Landing	12	0	1	0	0	Very Strong	5	Flying Normally	0	-180	-180	0	29.96425269034357	-95.69872569900717	1471	0	0	15	10	18821	0	37	0	0	-127.6999969482422	Yaw Follow	2	0	0	0	38	0	Unknown	0	Unknown	3	No Data	P	2	0	0	0	0	0	0	No Present	254	0	0	0	0	0	0	0	38	100	839	0	0	0	0	0	839	100	100	441	100	100	142	Record Video	1	0	0	0	0	0	0	0	0	38	1	98.13274	38	0	0	AF	0	0	Manual	0	Idle	0	0	0	0	No Data	25.44600821377476
+10/15/2016 01:45:36	159.118		29.96428828689266	-95.69879075521202	159103	88	4868	-10648	15912	93	839	4000	4005	4002	4005	97	29.96424976060167	-95.69872367971793	0	-1.312336	-127.2	0	0	0	-5.600000000000001	-0.8	17	1	1	Landing	12	0	1	0.328084	0	Very Strong	5	Flying Normally	0	-180	-180	0	29.96425269034357	-95.69872569900717	1471	0	0	15	10	18821	0	42	0	0	-127.6999969482422	Yaw Follow	2	0	0	0	45	0	Unknown	0	Unknown	3	No Data	P	2	0	0	0	0	0	0	No Present	254	0	0	0	0	0	0	0	45	100	939	0	0	0	0	0	939	100	100	44	100	100	242	Record Video	1	0	0	0	0	0	0	0	0	42	1	98.13274	42	0	0	AF	0	0	Manual	0	Idle	0	0	0	0	No Data	25.44586823542912
+#Flight Recorder Session End
+Date/Time (GMT)	10/15/2016 01:45:37
+Elapsed Time (sec)	160.278

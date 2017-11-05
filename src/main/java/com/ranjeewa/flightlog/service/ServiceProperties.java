@@ -12,6 +12,12 @@ public class ServiceProperties {
      */
     private String filePath = "/Users/ranjeewa/Documents/";
 
+    /**
+     * Parameter name to read from time-series data
+     *
+     */
+    private String paramName = "Aircraft Battery Voltage (mV)";
+
     public String getFilePath() {
         return this.filePath;
     }
@@ -20,4 +26,11 @@ public class ServiceProperties {
         this.filePath = filePath;
     }
 
+    public String getParamName() {
+        return paramName;
+    }
+
+    public void setParamName(String paramName) {
+        this.paramName = paramName;
+    }
 }
