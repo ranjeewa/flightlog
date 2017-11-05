@@ -24,7 +24,6 @@ public class FlightLogService {
     public void saveFlightLogValues(String fileName) {
 
         File file = fileService.findFile(fileName);
-
         if (file != null && !file.exists()) {
             return;
         }

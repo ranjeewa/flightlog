@@ -2,14 +2,17 @@ package com.ranjeewa.flightlog.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Description;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.StandardCopyOption;
+import java.util.UUID;
 
 @Component
+@Description("A service for saving and retrieving flight logs from the filesystem")
 public class FileService {
 
     private final static Logger logger = LoggerFactory.getLogger(FileService.class);
@@ -22,8 +25,7 @@ public class FileService {
 
     public String saveFile(InputStream inputStream) throws IOException {
 
-        //TODO replace with a UUID
-        String fileName = Long.toString(System.currentTimeMillis());
+        String fileName = UUID.randomUUID().toString();
 
         File target = new File(serviceProperties.getFilePath() + File.separator + fileName);
 
@@ -32,8 +34,16 @@ public class FileService {
                     inputStream,
                     target.toPath(),
                     StandardCopyOption.REPLACE_EXISTING);
-            logger.info("Saved new flight log with name {}", fileName);
-            return fileName;
+
+            if (target.length() == 0) {
+                logger.debug("Received POST with empty body");
+                target.delete();
+                return null;
+            } else {
+                logger.info("Saved new flight log with name {}", fileName);
+                return fileName;
+            }
+
         } catch (IOException e) {
             logger.error("Error saving a new flight log, message is {}", e.getMessage());
             throw e;

@@ -63,6 +63,22 @@ public class FileServiceTest {
     }
 
     @Test
+    public void dontSaveEmptyFile() throws Exception {
+
+        FileService service = new FileService(testProps);
+
+        File targetDir = new File(testProps.getFilePath());
+        assertTrue(targetDir.exists());
+        assertEquals(0, targetDir.listFiles().length);
+
+        String testString = ""; //create inputstream with no bytes in it
+        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(testString.getBytes());
+        service.saveFile(byteArrayInputStream);
+
+        assertEquals(0, targetDir.listFiles().length);
+    }
+
+    @Test
     public void canGetExistingFile() throws Exception {
 
         FileService service = new FileService(testProps);

@@ -53,12 +53,13 @@ public class FlightLogController {
         }
     }
 
-    @RequestMapping(method = GET, path = "/flights/{id}/battery", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(method = GET, path = "/flights/{id}/stats", produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<Map<String, String>> findBatteryValues(@PathVariable("id") String fileName) throws IOException {
         FlightLog log = flightLogRepository.findByFlightLogFileName(fileName);
         if (log == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
+            //TODO implement a DTO for this
             Map<String, String> model = new HashMap<>();
             model.put("resourceId", "/flights/"+fileName);
             model.put("startValue", log.getStartValue());
@@ -68,12 +69,17 @@ public class FlightLogController {
     }
 
     @RequestMapping(method = POST, path= "/flights", produces = "application/json")
-    @ResponseBody Map<String, String> uploadFlightLog(InputStream flightLog) throws IOException {
+    ResponseEntity<Map<String, String>> uploadFlightLog(InputStream flightLog) throws IOException {
 
         String fileName = fileService.saveFile(flightLog);
-        //TODO make parsing request async
-        parserService.saveFlightLogValues(fileName);
-        return Collections.singletonMap("resourceId", "/flights/" + fileName);
+        if (fileName != null) {
+            //TODO make parsing request async
+            parserService.saveFlightLogValues(fileName);
+            Map<String, String> model = Collections.singletonMap("resourceId", "/flights/" + fileName);
+            return new ResponseEntity<>(model, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @ExceptionHandler(IOException.class)

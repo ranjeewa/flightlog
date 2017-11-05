@@ -31,9 +31,9 @@ public class FlightLogControllerTest {
 
 
         FlightLogController controller = new FlightLogController(mockFileService, mockParserService, mockRepository);
-        Map<String, String> response = controller.uploadFlightLog(new ByteArrayInputStream("flightlog".getBytes()));
+        ResponseEntity<Map<String, String>> response = controller.uploadFlightLog(new ByteArrayInputStream("flightlog".getBytes()));
         assertNotNull(response);
-        assertEquals("/flights/"+ savedFile, response.get("resourceId"));
+        assertEquals("/flights/"+ savedFile, response.getBody().get("resourceId"));
     }
 
     @Test
@@ -44,7 +44,7 @@ public class FlightLogControllerTest {
 
         try {
             FlightLogController controller = new FlightLogController(mockFileService, mockParserService, mockRepository);
-            Map<String, String> response = controller.uploadFlightLog(new ByteArrayInputStream("flightlog".getBytes()));
+            ResponseEntity<Map<String, String>> response = controller.uploadFlightLog(new ByteArrayInputStream("flightlog".getBytes()));
             fail("Should throw exception");
         } catch (Exception e) {
             assertTrue(e instanceof IOException);
