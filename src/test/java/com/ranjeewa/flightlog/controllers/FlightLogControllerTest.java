@@ -1,5 +1,6 @@
 package com.ranjeewa.flightlog.controllers;
 
+import com.ranjeewa.flightlog.domain.FlightLog;
 import com.ranjeewa.flightlog.service.FileService;
 import com.ranjeewa.flightlog.service.FlightLogRepository;
 import com.ranjeewa.flightlog.service.MessageService;
@@ -112,4 +113,48 @@ public class FlightLogControllerTest {
         assertEquals(HttpStatus.NOT_FOUND.value(), responseEntity.getStatusCodeValue());
     }
 
+    @Test
+    public void nonExistingFileReturnsNoStats() throws Exception {
+
+        String noFile = "noSuchFile";
+
+        MessageService mockMessageService = mock(MessageService.class);
+        FileService mockFileService = mock(FileService.class);
+        FlightLogRepository repository = mock(FlightLogRepository.class);
+        when(repository.findByFlightLogFileName(noFile)).thenReturn(null);
+
+        FlightLogController controller = new FlightLogController(mockFileService, repository, mockMessageService);
+
+        ResponseEntity<Map<String, String>> responseEntity = controller.findBatteryValues(noFile);
+        assertNotNull(responseEntity);
+        assertEquals(HttpStatus.NOT_FOUND.value(), responseEntity.getStatusCodeValue());
+    }
+
+    @Test
+    public void canGetStatsForExistingFile() throws Exception {
+
+        String existingFile = "myFile";
+
+        FlightLog model = new FlightLog();
+        model.setFlightLogFileName(existingFile);
+        model.setStartValue("100");
+        model.setEndValue("0");
+
+        MessageService mockMessageService = mock(MessageService.class);
+        FileService mockFileService = mock(FileService.class);
+        FlightLogRepository repository = mock(FlightLogRepository.class);
+        when(repository.findByFlightLogFileName(existingFile)).thenReturn(model);
+
+        FlightLogController controller = new FlightLogController(mockFileService, repository, mockMessageService);
+
+        ResponseEntity<Map<String, String>> responseEntity = controller.findBatteryValues(existingFile);
+
+        assertNotNull(responseEntity);
+        assertEquals(HttpStatus.OK.value(), responseEntity.getStatusCodeValue());
+        Map<String, String> responseBody = responseEntity.getBody();
+        assertNotNull(responseBody);
+        assertEquals("/flights/"+existingFile, responseBody.get("resourceId"));
+        assertTrue(responseBody.containsKey("startValue"));
+        assertTrue(responseBody.containsKey("endValue"));
+    }
 }
